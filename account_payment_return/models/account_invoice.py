@@ -6,6 +6,9 @@
 #                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 #    Copyright (c) 2014 initOS GmbH & Co. KG <http://initos.com/>
 #                       Markus Schneider <markus.schneider at initos.com>
+#    Copyright (c) 2015 Incaser Informatica S.L. <http://www.incaser.es>
+#                       Carlos Dauden <carlos@incaser.es>
+#                       Sergio Teruel <sergio@incaser.es>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -22,12 +25,18 @@
 #
 ##############################################################################
 from openerp import models, fields
+import openerp.addons.decimal_precision as dp
 
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
     returned_payment = fields.Boolean(
+        oldname="payment_returned",
         string='Payment returned',
         help='Invoice has been included on a payment that has been returned '
              'later.')
+    bank_fee = fields.Float(
+        oldname="bank_charge",
+        readonly=True,
+        digits=dp.get_precision('Account'))

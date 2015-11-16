@@ -19,6 +19,8 @@
 		                    <field name="journal_id" domain="[('type', 'in', ['bank', 'cash'])]"/>
 		                    <field name="date"/>
 		                    <field name="period_id"/>
+		                    <field name="bank_fee"/>
+		                    <field name="invoice_payment_type"/>
 		                    <field name="company_id" groups="base.group_multi_company"/>
 	                    </group>
 	                    <notebook colspan="4">
@@ -39,6 +41,11 @@
 	                                    <field name="amount" />
 	                                </tree>
 	                            </field>
+	                        </page>
+	                        <page string="Notes">
+	                           <group>
+	                               <field colspan="4" name="notes" nolabel="1"/>
+	                           </group>
 	                        </page>
 	                    </notebook>
                     </sheet>
