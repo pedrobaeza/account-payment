@@ -81,8 +81,7 @@ class PaymentReturn(models.Model):
         track_visibility='onchange')
     notes = fields.Text('Notes')
     bank_fee = fields.Float(
-        oldname='bank_charge',
-        help='Bank charge by line',
+        help='Bank fee by line',
         states={'done': [('readonly', True)],
                 'cancelled': [('readonly', True)]})
     invoice_payment_type = fields.Many2one(

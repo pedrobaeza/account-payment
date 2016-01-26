@@ -32,11 +32,9 @@ class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
     returned_payment = fields.Boolean(
-        oldname="payment_returned",
         string='Payment returned',
         help='Invoice has been included on a payment that has been returned '
              'later.')
     bank_fee = fields.Float(
-        oldname="bank_charge",
         readonly=True,
         digits=dp.get_precision('Account'))

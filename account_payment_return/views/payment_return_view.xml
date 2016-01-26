@@ -37,7 +37,7 @@
                                                         ('account_id.type', '=', 'receivable'),
                                                         ('credit', '>', 0.0),
                                                         ('reconcile_ref', '!=', False)]"
-                                                />
+                                               options="{'no_create': True}"/>
 	                                    <field name="amount" />
 	                                </tree>
 	                            </field>
