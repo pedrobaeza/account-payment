@@ -8,6 +8,9 @@
 #                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 #    Copyright (c) 2014 initOS GmbH & Co. KG <http://initos.com/>
 #                       Markus Schneider <markus.schneider at initos.com>
+#    Copyright (c) 2015 Incaser Informatica S.L. <http://www.incaser.es>
+#                       Carlos Dauden <carlos@incaser.es>
+#                       Sergio Teruel <sergio@incaser.es>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -76,6 +79,16 @@ class PaymentReturn(models.Model):
                    ('cancelled', 'Cancelled')],
         string='State', readonly=True, default='draft',
         track_visibility='onchange')
+    notes = fields.Text('Notes')
+    bank_fee = fields.Float(
+        help='Bank fee by line',
+        states={'done': [('readonly', True)],
+                'cancelled': [('readonly', True)]})
+    invoice_payment_type = fields.Many2one(
+        comodel_name='payment.mode.type',
+        help='If set, assign to return invoice this payment type',
+        states={'done': [('readonly', True)],
+               'cancelled': [('readonly', True)]})
 
     def _get_invoices(self, move_lines):
         invoice_moves = self.env['account.move']
@@ -110,7 +123,7 @@ class PaymentReturn(models.Model):
             move_line2 = move_line.copy(
                 default={
                     'move_id': move_id.id,
-                    'debit': return_line.amount,
+                    'debit': return_line.amount + self.bank_fee,
                     'name': move['ref'],
                     'credit': 0,
                 })
@@ -118,7 +131,7 @@ class PaymentReturn(models.Model):
             move_line2.copy(
                 default={
                     'debit': 0,
-                    'credit': return_line.amount,
+                    'credit': return_line.amount + self.bank_fee,
                     'account_id': self.journal_id.default_credit_account_id.id,
                 })
             # Break old reconcile and
@@ -128,7 +141,16 @@ class PaymentReturn(models.Model):
             return_line.write(
                 {'reconcile_id': move_line2.reconcile_partial_id.id})
             # Mark invoice as payment refused
-            invoices.write({'returned_payment': True})
+            vals_inv = {'returned_payment': True}
+            if self.invoice_payment_type:
+                vals_inv['payment_type'] = self.invoice_payment_type.id
+            if self.bank_fee:
+                vals_inv['bank_fee'] = self.bank_fee
+            invoices.write(vals_inv)
+            # Mark payment_line Storno
+            payment_line = self.env['payment.line'].search(
+                [('transit_move_line_id','=', return_line.move_line_id.id)])
+            payment_line.write({'storno' : True})
         move_id.button_validate()
         self.write({'state': 'done', 'move_id': move_id.id})
         return True
@@ -149,7 +171,10 @@ class PaymentReturn(models.Model):
                     lines2reconcile.reconcile()
                 return_line.write({'reconcile_id': False})
             # Remove payment refused flag on invoice
-            invoices.write({'returned_payment': False})
+            vals_inv = {'returned_payment': False}
+            if self.bank_fee:
+                vals_inv['bank_fee'] = 0.0
+            invoices.write(vals_inv)
         self.move_id.button_cancel()
         self.move_id.unlink()
         self.write({'state': 'cancelled', 'move_id': False})

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-12 16:33+0000\n"
-"PO-Revision-Date: 2015-02-12 16:33+0000\n"
+"POT-Creation-Date: 2016-01-26 18:30+0000\n"
+"PO-Revision-Date: 2016-01-26 18:30+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,39 +16,19 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_payment_return
-#: field:payment.return.line,amount:0
-msgid "Amount"
+#: field:account.invoice,bank_fee:0
+#: field:payment.return,bank_fee:0
+msgid "Bank fee"
 msgstr ""
 
 #. module: account_payment_return
-#: help:payment.return.line,amount:0
-msgid "Returned amount. Can be different from the move amount"
-msgstr ""
-
-#. module: account_payment_return
-#: field:payment.return,journal_id:0
-msgid "Bank journal"
+#: help:payment.return,bank_fee:0
+msgid "Bank fee by line"
 msgstr ""
 
 #. module: account_payment_return
 #: view:payment.return:account_payment_return.payment_return_form_view
 msgid "Cancel"
-msgstr ""
-
-#. module: account_payment_return
-#: selection:payment.return,state:0
-msgid "Cancelled"
-msgstr ""
-
-#. module: account_payment_return
-#: field:payment.return,company_id:0
-#: help:payment.return,company_id:0
-msgid "Company"
-msgstr ""
-
-#. module: account_payment_return
-#: field:payment.return.line,concept:0
-msgid "Concept"
 msgstr ""
 
 #. module: account_payment_return
@@ -69,8 +49,10 @@ msgid "Created on"
 msgstr ""
 
 #. module: account_payment_return
-#: field:payment.return.line,partner_id:0
-msgid "Customer"
+#: model:ir.actions.act_window,name:account_payment_return.payment_return_action
+#: model:ir.ui.menu,name:account_payment_return.payment_return_menu
+#: view:payment.return:account_payment_return.payment_return_tree_view
+msgid "Customer Payment Returns"
 msgstr ""
 
 #. module: account_payment_return
@@ -79,19 +61,18 @@ msgid "Date of the last message posted on the record."
 msgstr ""
 
 #. module: account_payment_return
-#: selection:payment.return,state:0
-msgid "Done"
-msgstr ""
-
-#. module: account_payment_return
 #: view:payment.return:account_payment_return.payment_return_form_view
-#: selection:payment.return,state:0
 msgid "Draft"
 msgstr ""
 
 #. module: account_payment_return
-#: field:payment.return,period_id:0
-msgid "Forced period"
+#: field:payment.return,message_follower_ids:0
+msgid "Followers"
+msgstr ""
+
+#. module: account_payment_return
+#: help:payment.return,message_summary:0
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
 msgstr ""
 
 #. module: account_payment_return
@@ -101,8 +82,13 @@ msgid "ID"
 msgstr ""
 
 #. module: account_payment_return
-#: selection:payment.return,state:0
-msgid "Imported"
+#: help:payment.return,message_unread:0
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: account_payment_return
+#: help:payment.return,invoice_payment_type:0
+msgid "If set, assign to return invoice this payment type"
 msgstr ""
 
 #. module: account_payment_return
@@ -116,8 +102,18 @@ msgid "Invoice has been included on a payment that has been returned later."
 msgstr ""
 
 #. module: account_payment_return
+#: field:payment.return,invoice_payment_type:0
+msgid "Invoice payment type"
+msgstr ""
+
+#. module: account_payment_return
 #: view:account.invoice:account_payment_return.view_account_invoice_filter_return
 msgid "Invoices whose payment has been returned"
+msgstr ""
+
+#. module: account_payment_return
+#: field:payment.return,message_is_follower:0
+msgid "Is a Follower"
 msgstr ""
 
 #. module: account_payment_return
@@ -148,26 +144,23 @@ msgid "Lines"
 msgstr ""
 
 #. module: account_payment_return
+#: field:payment.return,message_ids:0
+msgid "Messages"
+msgstr ""
+
+#. module: account_payment_return
+#: help:payment.return,message_ids:0
+msgid "Messages and communication history"
+msgstr ""
+
+#. module: account_payment_return
 #: view:payment.return:account_payment_return.payment_return_form_view
-#: field:payment.return,notes:0
-#: field:payment.return.line,notes:0
 msgid "Notes"
-msgstr ""
-
-#. module: account_payment_return
-#: field:payment.return.line,partner_name:0
-msgid "Partner name"
-msgstr ""
-
-#. module: account_payment_return
-#: field:payment.return.line,move_line_id:0
-msgid "Payment Reference"
 msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return
 #: view:payment.return:account_payment_return.payment_return_form_view
-#: field:payment.return.line,return_id:0
 msgid "Payment return"
 msgstr ""
 
@@ -179,53 +172,14 @@ msgstr ""
 
 #. module: account_payment_return
 #: field:account.invoice,returned_payment:0
-msgid "Retuned payment"
+msgid "Payment returned"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.actions.act_window,name:account_payment_return.payment_return_action
-#: model:ir.ui.menu,name:account_payment_return.payment_return_menu
-#: view:payment.return:account_payment_return.payment_return_tree_view
-msgid "Customer Payment Returns"
-msgstr ""
-
-#. module: account_payment_return
-#: help:payment.return.line,concept:0
-#: help:payment.return.line,date:0
-#: help:payment.return.line,partner_name:0
-#: help:payment.return.line,reason:0
-msgid "Read from imported file. Only for reference."
-msgstr ""
-
-#. module: account_payment_return
-#: field:payment.return.line,reconcile_id:0
-msgid "Reconcile"
-msgstr ""
-
-#. module: account_payment_return
-#: field:payment.return,name:0
-msgid "Reference"
-msgstr ""
-
-#. module: account_payment_return
-#: field:payment.return,move_id:0
-msgid "Reference to the created journal entry"
-msgstr ""
-
-#. module: account_payment_return
-#: help:payment.return.line,reconcile_id:0
-msgid "Reference to the reconcile object."
-msgstr ""
-
-#. module: account_payment_return
-#: field:payment.return,date:0
-#: field:payment.return.line,date:0
-msgid "Return date"
-msgstr ""
-
-#. module: account_payment_return
-#: field:payment.return.line,reason:0
-msgid "Return reason"
+#: code:addons/account_payment_return/models/payment_return.py:110
+#: code:addons/account_payment_return/models/payment_return.py:111
+#, python-format
+msgid "Return %s"
 msgstr ""
 
 #. module: account_payment_return
@@ -234,28 +188,8 @@ msgid "Returned"
 msgstr ""
 
 #. module: account_payment_return
-#: field:payment.return,state:0
-msgid "State"
-msgstr ""
-
-#. module: account_payment_return
-#: model:mail.message.subtype,name:account_payment_return.mt_payment_return_state_change
-msgid "Status Change"
-msgstr ""
-
-#. module: account_payment_return
-#: model:mail.message.subtype,description:account_payment_return.mt_payment_return_state_change
-msgid "Status changed"
-msgstr ""
-
-#. module: account_payment_return
 #: field:payment.return,message_summary:0
 msgid "Summary"
-msgstr ""
-
-#. module: account_payment_return
-#: help:payment.return,date:0
-msgid "This date will be used as the account entry date."
 msgstr ""
 
 #. module: account_payment_return
@@ -271,5 +205,12 @@ msgstr ""
 #. module: account_payment_return
 #: help:payment.return,website_message_ids:0
 msgid "Website communication history"
+msgstr ""
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:106
+#: code:addons/account_payment_return/models/payment_return.py:107
+#, python-format
+msgid "You must input all moves references in the payment return."
 msgstr ""
 

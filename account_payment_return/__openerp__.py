@@ -10,6 +10,7 @@
 #                       Markus Schneider <markus.schneider at initos.com>
 #    Copyright (c) 2015 Incaser Informatica <http://www.incaser.es/>
 #                       Sergio Teruel <sergio at incaser.es>
+#                       Carlos Dauden <carlos at incaser.es>
 #    Copyright (c) 2015 Serv. Tecnol. Avanzados <http://www.serviciosbaeza.com>
 #                       Pedro M. Baeza <pedro.baeza at serviciosbaeza.com>
 #
@@ -31,16 +32,17 @@
 
 {
     "name": "Account Payment Returns",
-    "version": "8.0.1.0.0",
+    "version": "8.0.1.0.1",
     "summary": "Manage the return of your payments",
     'license': 'AGPL-3',
     "depends": [
         'mail',
         'account',
+        'account_banking_payment_export'
     ],
     'author': '7 i TRIA, '
               'Serv. Tecnol. Avanzados - Pedro M. Baeza, '
-              'Incaser Informática, '
+              'Incaser Informatica S.L., '
               'initOS GmbH & Co., '
               'Odoo Community Association (OCA)',
     'website': 'http://www.serviciosbaeza.com',

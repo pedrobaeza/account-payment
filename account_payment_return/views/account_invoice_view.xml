@@ -10,6 +10,8 @@
             <field name="arch" type="xml">
                 <xpath expr='//field[@name="reconciled"]' position="after">
                     <field name="returned_payment" readonly="True"/>
+                    <field name="bank_fee" widget="monetary"
+                           options="{'currency_field': 'currency_id'}"/>
                 </xpath>
             </field>
         </record>
