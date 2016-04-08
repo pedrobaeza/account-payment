@@ -69,7 +69,7 @@ class PaymentReturn(models.Model):
                     ', '.join(error_line.mapped('move_line_ids.name')),
                     error_line.partner_id.name,
                     error_line.return_id.name
-            )
+                )
             )
         error_list = []
         all_move_lines = self.env['account.move.line']
@@ -99,10 +99,7 @@ class PaymentReturn(models.Model):
         return invoices
 
     def _get_move_amount(self, return_line, move_line):
-        if return_line.move_line_count > 1:
-            return move_line.credit
-        else:
-            return return_line.amount
+        return return_line.amount
 
     def _prepare_invoice_returned_vals(self):
         return {'returned_payment': True}
@@ -233,13 +230,6 @@ class PaymentReturnLine(models.Model):
     reconcile_id = fields.Many2one(
         comodel_name='account.move.reconcile', string='Reconcile',
         help="Reference to the reconcile object.")
-    move_line_count = fields.Integer(compute='_compute_move_line_count')
-
-    @api.multi
-    @api.depends('move_line_ids')
-    def _compute_move_line_count(self):
-        for line in self:
-            line.move_line_count = len(line.move_line_ids)
 
     @api.multi
     def _compute_amount(self):

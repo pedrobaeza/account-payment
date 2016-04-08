@@ -39,10 +39,7 @@
                                                         ('credit', '>', 0.0),
                                                         ('reconcile_ref', '!=', False)]"
                                                 />
-	                                    <field name="move_line_count" invisible="1"/>
-	                                    <field name="amount"
-                                               attrs="{'readonly': [('move_line_count','>',1)]}"
-                                        />
+	                                    <field name="amount"/>
 	                                </tree>
 	                            </field>
 	                        </page>
