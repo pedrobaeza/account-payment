@@ -54,7 +54,8 @@
             <field name="search_view_id" ref="view_payment_mode_search"/>
         </record>
 
-        <menuitem action="action_payment_mode_form" id="menu_action_payment_mode_form" parent="account.menu_configuration_misc" groups="base.group_no_one"/>
+        <menuitem name='Payment Modes' id='root_payment_mode_menu' parent='account.menu_finance_configuration'/>
+        <menuitem action="action_payment_mode_form" id="menu_action_payment_mode_form" parent="account_payment_order.root_payment_mode_menu" groups="base.group_no_one"/>
 
         <record id="view_payment_order_form" model="ir.ui.view">
             <field name="name">payment.order.form</field>
@@ -242,7 +243,7 @@
                         </page>
                         <page string="Information">
                             <group col="4" string="General Information">
-                                <label for="amoun"/>
+                                <label for="amount"/>
                                 <div>
                                     <field name="amount" class="oe_inline"/>
                                     <field name="company_currency" class="oe_inline"/>
@@ -291,8 +292,8 @@
             <field name="model">account.bank.statement</field>
             <field name="inherit_id" ref="account.view_bank_statement_form"/>
             <field name="arch" type="xml">
-	            <xpath expr="//div[@name='import_buttons']" position="inside">
-	                <button class="oe_inline oe_stat_button" name="%(action_account_populate_statement_confirm)d" attrs="{'invisible':[('state','=','confirm')]}" string="Import Lines" help="Import Payment Lines" type="action" icon="fa-cogs" widget="statinfo"/>
+	            <xpath expr="//div[@name='button_box']" position="inside">
+	                <button class="oe_inline oe_stat_button" name="%(action_account_populate_statement_confirm)d" attrs="{'invisible':[('state','=','confirm')]}" string="Import Payment Lines" help="Import Payment Lines" type="action" icon="fa-cogs" widget="statinfo"/>
 	            </xpath>
             </field>
         </record>
