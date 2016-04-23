@@ -8,7 +8,6 @@
         </record>
         <record id="payment_mode_1" model="payment.mode">
             <field name="name">Direct Payment</field>
-            <field name="journal" search="[('type', '=', 'bank')]"/>
             <field name="bank_id" ref="account_payment_order.partner_bank_1"/>
             <field name="company_id" ref="base.main_company"/>
         </record>
